@@ -15,7 +15,7 @@ public class JSExe {
 
 //		System.out.println(str1.equals(str2)); // 문자열을 비교할때는 .equals를 사용
 
-		//test2();// 호출
+		// test2();// 호출
 //		test3();//스캐너 입력
 		test4();
 	}// end of main
@@ -72,30 +72,39 @@ public class JSExe {
 	}// end of test3
 
 	public static void test4() {
-		
-		Scanner scn=new Scanner(System.in);
-		
-		String str= "친구목록은";
-		while(true) {
+
+		Scanner scn = new Scanner(System.in);
+
+		String str = "친구목록은";
+
+		while (true) {
 			System.out.println("친구이름을 입력하세요.종료 quit>>");
-			String msg=scn.nextLine();	
-			//equals로 비교
-			if(msg.equals("quit")) {
+			String msg = scn.nextLine();
+			// equals로 비교
+
+			if (msg.equals("quit")) {
 				str += "입니다";
 				break;
+
 			}			
 			System.out.println("친구목록은 "+msg);
 			str += ", "+msg;//+= 누적하겠다는 의미
+
+			}
+			if () {
+				str += " " + msg;
+			} else {
+				str += ", " + msg;
+			}
+//			System.out.println("친구목록은 " + msg);
+//			str += ", " + msg;// += 누적하겠다는 의미
+>>>>>>> branch 'master' of https://github.com/yu-kyoung/HelloWorld.git
 		}
-		//홍길동, 김민규, 최석영 
-		//친구목록은 , , , , 입니다.
+		// 홍길동, 김민규, 최석영
+		// 친구목록은 , , , , 입니다.
 		System.out.println(str);
 		System.out.println("end of prog.");
-		
-		
-	}//end of test4
-	
-	
-	
-	
+
+	}// end of test4
+
 }// end of class
