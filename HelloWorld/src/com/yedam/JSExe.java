@@ -3,13 +3,13 @@ package com.yedam;
 public class JSExe {
 	public static void main(String[] args) {
 		// 임의의 수를 생성.1~10사이의 임의의 수 생성
-		int sum =0;
-		for(int i=1; i<=5; i++) {
-		int result = (int) (Math.random() * 10) + 1;// 0<= x <1 실수 캐스팅 중요
-		sum=+result;
+		int sum = 0;
+		for (int i = 1; i <= 5; i++) {
+			int result = (int) (Math.random() * 10) + 1;// 0<= x <1 실수 캐스팅 중요
+			sum = +result;
 		}
 		System.out.println("결과: " + sum);
-	
+
 	}// end of main
 
 	public static void test() {
