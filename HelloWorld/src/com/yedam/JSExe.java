@@ -85,7 +85,7 @@ public class JSExe {
 				break;
 			}			
 			System.out.println("친구목록은 "+msg);
-			str += msg + ", ";//+= 누적하겠다는 의미
+			str += ", "+msg;//+= 누적하겠다는 의미
 		}
 		//홍길동, 김민규, 최석영 
 		//친구목록은 , , , , 입니다.
