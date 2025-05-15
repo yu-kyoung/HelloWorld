@@ -98,13 +98,13 @@ public class JSExe {
 			}
 //			System.out.println("친구목록은 " + msg);
 //			str += ", " + msg;// += 누적하겠다는 의미
->>>>>>> branch 'master' of https://github.com/yu-kyoung/HelloWorld.git
-		}
-		// 홍길동, 김민규, 최석영
-		// 친구목록은 , , , , 입니다.
-		System.out.println(str);
-		System.out.println("end of prog.");
 
-	}// end of test4
+		}
+	// 홍길동, 김민규, 최석영
+	// 친구목록은 , , , , 입니다.
+	System.out.println(str);
+	System.out.println("end of prog.");
+
+}// end of test4
 
 }// end of class
