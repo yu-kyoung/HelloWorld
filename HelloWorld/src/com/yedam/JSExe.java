@@ -17,7 +17,8 @@ public class JSExe {
 
 		// test2();// 호출
 //		test3();//스캐너 입력
-		test4();
+//		test4();
+		test5();
 	}// end of main
 
 	public static void test() {
@@ -77,6 +78,8 @@ public class JSExe {
 
 		String str = "친구목록은";
 
+		boolean first = true;// 참거짓
+
 		while (true) {
 			System.out.println("친구이름을 입력하세요.종료 quit>>");
 			String msg = scn.nextLine();
@@ -86,25 +89,34 @@ public class JSExe {
 				str += "입니다";
 				break;
 
-			}			
-			System.out.println("친구목록은 "+msg);
-			str += ", "+msg;//+= 누적하겠다는 의미
-
 			}
-			if () {
-				str += " " + msg;
+			System.out.println("친구목록은 " + msg);
+			str += ", " + msg;// += 누적하겠다는 의미
+
+			if (first) {
+				str +="" + msg;
+				first = false;
 			} else {
 				str += ", " + msg;
 			}
+		}
 //			System.out.println("친구목록은 " + msg);
 //			str += ", " + msg;// += 누적하겠다는 의미
 
-		}
-	// 홍길동, 김민규, 최석영
-	// 친구목록은 , , , , 입니다.
-	System.out.println(str);
-	System.out.println("end of prog.");
+		// 홍길동, 김민규, 최석영
+		// 친구목록은 , , , , 입니다.
+		System.out.println(str);
+		System.out.println("end of prog.");
 
-}// end of test4
+	}// end of test4
+
+	public static void test5() {
+		// printf ("형식문자열", 값1, 값2...)
+		System.out.printf("%s %.2f\t", "문자", 30.3 );// 뒤에오는 문자값을 받아오겠음( 문자열 s 십진수 d 실수 f)
+		System.out.printf("\n 안녕하세요. %s 입니다.\n 나이는 %d세 입니다.\n 몸무게는 %.1f 입니다.", "김유경", 35, 99.9);
+		
+		
+		
+	}
 
 }// end of class
