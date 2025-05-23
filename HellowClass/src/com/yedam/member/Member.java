@@ -5,9 +5,10 @@ package com.yedam.member;
 public class Member {
 
 	private String memberId;
-	private String memberName;
+	public String memberName;
 	private String phone;
 	private int point;
+	public int age;
 
 	public Member() {
 		// 매개값이 없는 생성자:기본생성자.
