@@ -9,8 +9,10 @@ public class SystemExe {
 	//60*60*24
 	long time=1747966191;
 	long year=time/(60*60*24*365);
-	long day=time/(60*60*24);
-	long h=time/(60*60);
+	long day=time%(60*60*24*365);
+	    day=day/(60*60*24);
+	
+	long h=day/(60*60);
 	long m=time/60;
 	System.out.printf("%d년 %d일, %d시 ,%d분",year ,day ,h ,m);
 	

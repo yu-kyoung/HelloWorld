@@ -1,8 +1,8 @@
 package com.yedam.api;
 
 public class Member {
-	String memberName;
-	int age;
+	public String memberName;
+	public int age;
 	public Member() {}
 	public Member(String memberName, int age) {
 		this.memberName=memberName;
