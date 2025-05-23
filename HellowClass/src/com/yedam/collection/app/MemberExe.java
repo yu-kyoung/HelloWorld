@@ -39,13 +39,13 @@ public class MemberExe {
 //				member.setPoint(point);
 
 				// 배열에 추가.
-				for (int i = 0; i < members.size(); i++) {
-					if (members[i] == null) {
-						members[i] = member;
+//				for (int i = 0; i < members.size(); i++) {
+//					if (members.get(i) == null) {
+						members.add(member);//members[i] = member;
 						System.out.println("등록완료.");
-						break; // 한건을 추가했으면 반복문 종료.
-					}
-				}
+//						break; // 한건을 추가했으면 반복문 종료.
+//					}
+//				}
 				break; // switch의 case 1 종료.
 
 			case 2: // 수정.
@@ -55,10 +55,10 @@ public class MemberExe {
 				telNo = scn.nextLine();
 
 				// 같은 값을 찾아서 변경하기.
-				for (int i = 0; i < members.length; i++) {
-					if (members[i] != null) {
-						if (members[i].getMemberId().equals(id)) {
-							members[i].setPhone(telNo);
+				for (int i = 0; i < members.size(); i++) {
+					if (members.get(i) != null) {
+						if (members.get(i).getMemberId().equals(id)) {
+							members.get(i).setPhone(telNo);
 							System.out.println("수정완료.");
 						}
 					}
@@ -70,10 +70,10 @@ public class MemberExe {
 				id = scn.nextLine();
 
 				// 같은 값을 찾아서 삭제하기.
-				for (int i = 0; i < members.length; i++) {
-					if (members[i] != null) {
-						if (members[i].getMemberId().equals(id)) {
-							members[i] = null;
+				for (int i = 0; i < members.size(); i++) {
+					if (members.get(i) != null) {
+						if (members.get(i).getMemberId().equals(id)) {
+							members.remove(i);//members.get(i) = null;
 							System.out.println("삭제완료.");
 						}
 					}
@@ -85,11 +85,13 @@ public class MemberExe {
 				name = scn.nextLine();
 
 				// 조회.
-				System.out.printf("%-10s %-5s %-15s\n", "UserId", "회원명", "TelNo");
-				for (int i = 0; i < members.length; i++) {
-					if (members[i] != null && (name.equals("") || name.equals(members[i].getMemberName()))) {
-						System.out.printf("%-10s %-5s %-15s\n", members[i].getMemberId(), members[i].getMemberName(),
-								members[i].getPoint());
+				System.out.printf("%-10s %-5s %-15s\n", "UserId", "회원명", "포인트");
+				for (int i = 0; i < members.size(); i++) {
+					if (name.equals("") ||name.equals(members.get(i).getMemberName())) {//members[i] != null && 필요없음
+						System.out.printf("%-10s %-5s %-15s\n",//
+								members.get(i).getMemberId(),//
+								members.get(i).getMemberName(),
+								members.get(i).getPoint());
 					}
 				}
 				break;
