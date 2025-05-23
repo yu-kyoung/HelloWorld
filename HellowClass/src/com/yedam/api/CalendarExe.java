@@ -4,45 +4,74 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
-
 //calendar:날짜 시간관련 
 //date: 날짜 시간 
 //클래스
 public class CalendarExe {
 	public static void main(String[] args) {
+		Scanner scn = new Scanner(System.in);
 		// Calendar 클래스
+		int year = 0;
+		int month = 0;
+		try {
+			System.out.println("년도를 입력하세요");
+			year = Integer.parseInt(scn.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println("숫자를 입력하세요");
+		}
 
-		makeCalendar(2025, 5);
+		
+		
+		try {
+			System.out.println("월을 입력하세요");
+			month = Integer.parseInt(scn.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println("숫자를 입력하세요");
+		}
 
+		makeCalendar(year, month);
 	}
 
-	// 달력 다날라감;;
 
-	Scanner scn = new Scanner(System.in);
+	
+
+	// 달력
 
 	public static void makeCalendar(int year, int month) {
 		Calendar now = Calendar.getInstance();
-		now.set(year, month - 1, 1);
-
-		System.out.printf("%d년 %2d월\n", year, month);
+//		now.set(year, month, date); month 0 부터 시작 4가 5월을 뜻함
+		now.set(1, -1, 1);
+		System.out.printf("%4d년 %2d월\n", year, month);
 		System.out.println("=============================");
 		System.out.println("Sun Mon Tue Wed Thu Fri Sat");
 		System.out.println("=============================");
-		
+
 		int space = now.get(Calendar.DAY_OF_WEEK);
 		int lastDate = now.getActualMaximum(Calendar.DATE);
 
+		for (int s = 1; s <= space; s++) {
+			System.out.printf("%4s", " ");
+		}
+		
 		for (int i = 1; i <= lastDate; i++) {
 			System.out.printf("%4d", i);
 
-			if ((i+space) % 7 == 0) {
+			if ((i + space) % 7 == 0) {
 				System.out.println();
 			}
 
 		}
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public static void date() {
 		Date today = new Date();
@@ -90,7 +119,7 @@ public class CalendarExe {
 				now.get(Calendar.DAY_OF_WEEK), //
 				now.getActualMaximum(Calendar.DATE)
 
-		);// get(1)년도ㅁㅁㅁ
+		);// get(1)년도
 
 	}
 }
