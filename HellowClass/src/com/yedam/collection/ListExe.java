@@ -8,21 +8,7 @@ import com.yedam.api.Member;
 //인덱스를 활용해서 객체를 관리.
 //순서를 가지고 중복된 값도 가능함
 
-class Student {
-	private int studentNo;
-	private int score;
 
-	public Student(int studentNo, int score) {
-		this.studentNo = studentNo;
-		this.score = score;
-
-	}
-
-	public int GetScore() {
-		return score;
-	}
-
-}
 
 public class ListExe {
 	public static void main(String[] args) {

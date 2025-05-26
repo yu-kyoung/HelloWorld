@@ -41,8 +41,9 @@ public class MemberExe {
 				// 배열에 추가.
 //				for (int i = 0; i < members.size(); i++) {
 //					if (members.get(i) == null) {
-						members.add(member);//members[i] = member;
+						if(members.add(member)){//members[i] = member;
 						System.out.println("등록완료.");
+						}
 //						break; // 한건을 추가했으면 반복문 종료.
 //					}
 //				}
@@ -56,11 +57,11 @@ public class MemberExe {
 
 				// 같은 값을 찾아서 변경하기.
 				for (int i = 0; i < members.size(); i++) {
-					if (members.get(i) != null) {
+//					if (members.get(i) != null) {
 						if (members.get(i).getMemberId().equals(id)) {
 							members.get(i).setPhone(telNo);
 							System.out.println("수정완료.");
-						}
+//						}
 					}
 				}
 				break;
@@ -71,11 +72,11 @@ public class MemberExe {
 
 				// 같은 값을 찾아서 삭제하기.
 				for (int i = 0; i < members.size(); i++) {
-					if (members.get(i) != null) {
+//					if (members.get(i) != null) {
 						if (members.get(i).getMemberId().equals(id)) {
 							members.remove(i);//members.get(i) = null;
 							System.out.println("삭제완료.");
-						}
+//						}
 					}
 				}
 				break;
