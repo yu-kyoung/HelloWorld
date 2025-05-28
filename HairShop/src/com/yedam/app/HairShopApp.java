@@ -11,11 +11,13 @@ public class HairShopApp {
 
 	static hairClientDAO dao = new hairClientDAO();
 	static String product;
-	
+	static int price;
+	static String des;
+
 	public static void main(String[] args) {
 		boolean run = true;
 		List<HairShop> hair = new ArrayList<>();
-		
+
 		Scanner scn = new Scanner(System.in);
 		while (run) {
 
@@ -36,54 +38,91 @@ public class HairShopApp {
 					int menu1 = scn.nextInt();
 					scn.nextLine();
 					switch (menu1) {
-					case 1://등록
+					case 1:// 등록
 						System.out.println("상품명을 입력하세요>> ");
 						product = scn.nextLine();
 						System.out.println("가격을 입력하세요>> ");
-						int price = Integer.parseInt(scn.nextLine());
+						price = Integer.parseInt(scn.nextLine());
 						System.out.println("상세설명을 입력하세요>> ");
-						String des = scn.nextLine();
+						des = scn.nextLine();
 
 						HairShop hs = new HairShop(product, price, des);
+
 						int a = dao.insert(hs);
+
+						if (a > 0) {// 1
+							System.out.println("상품등록완료");
+						} else {
+							System.out.println("상품등록실패");
+						}
+
 						break;
-					case 2://조회
-					case 3://수정
+					case 2:// 조회
+						List<HairShop> list = dao.select();
+						break;
+						
+						
+						
+					case 3:// 수정
 						System.out.println("상품명을 입력하세요>> ");
 						product = scn.nextLine();
 						System.out.println("수정할 가격을 입력하세요>> ");
-						int price1 = Integer.parseInt(scn.nextLine());
+						price = Integer.parseInt(scn.nextLine());
 						System.out.println("수정할 상세설명을 입력하세요>> ");
-						String des1 = scn.nextLine();
-						for (int i = 0; i < hair.size(); i++) {
-							if (hair.get(i).getProduct().equals(product)) {
-								hair.get(i).setPrice(price1);
-								hair.get(i).setDes(des1);
-								System.out.println("수정되었습니다.");
-							}
+						des = scn.nextLine();
+//						for (int i = 0; i < hair.size(); i++) {
+//							if (hair.get(i).getProduct().equals(product)) {
+//								hair.get(i).setPrice(price);
+//								hair.get(i).setDes(des);
+//								System.out.println("수정되었습니다.");
+//							}else {
+//								System.out.println("수정 실패.");
+//							}
+//						}
+						HairShop hs1 = new HairShop(product, price, des);
+						int a1 = dao.update(hs1);
+						if (a1 > 0) {
+							System.out.println("상품이 수정되었습니다.");
+						} else {
+							System.out.println("상품 수정을 실패했습니다.");
 						}
-						HairShop hs1 = new HairShop(product, price1, des1);
-						dao.update(hs1);
+
 						break;
-					case 4://삭제
+					case 4:// 삭제
 						System.out.println("상품명을 입력하세요>> ");
 						product = scn.nextLine();
-						for (int i = 0; i < hair.size(); i++) {
-							if (hair.get(i).getProduct().equals(product)) {
-								System.out.println("삭제하시겠습니까?(y,n)");
-								String yesNo = scn.nextLine();
-								if (yesNo.toLowerCase().equals("y")) {
-									System.out.println("삭제되었습니다.");
-								} else if (yesNo.equals("n".toLowerCase())) {
-									System.out.println("취소되었습니다.");
-								}
-							}
 
+//						for (int i = 0; i < hair.size(); i++) {
+//							if (hair.get(i).getProduct().equals(product)) {
+//								System.out.println("삭제하시겠습니까?(y/n)");
+////								String yesNo = scn.nextLine();
+////								if (yesNo.toLowerCase().equals("y")) {
+////									System.out.println("삭제되었습니다.");
+////								} else if (yesNo.toLowerCase().equals("n")) {
+////									System.out.println("취소되었습니다.");
+////								}
+////							}
+////
+////						}
+						HairShop hs2 = new HairShop(product, price, des);
+						int a2 = dao.delete(product);
+						if (a2 > 0) {
+							System.out.println("상품을 삭제하겠습니까?(y/n)");
+							String yesNo = scn.nextLine();
+							if (yesNo.toLowerCase().equals("y")) {
+								System.out.println("삭제되었습니다.");
+							} else if (yesNo.toLowerCase().equals("n")) {
+								System.out.println("취소되었습니다.");
+							}
 						}
-						dao.delete(product);
+
+						break;
 					case 5:
-						run1=false;
-					
+						run1 = false;
+
+					default:
+						System.out.println("잘못된 입력입니다.");
+
 					}// switch
 				} // while
 			case 2:
@@ -92,7 +131,7 @@ public class HairShopApp {
 
 			case 4:// 종료
 				run = false;
-				
+
 			}// end of switch
 
 		} // end of while
