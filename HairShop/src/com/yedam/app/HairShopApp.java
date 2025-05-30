@@ -25,12 +25,14 @@ public class HairShopApp {
 	static String birth;
 	static String rank;
 	static String date;
-
-//	static HairShop hs1 = new HairShop(clientId, clientName, phone, birth, pay);
+	
+	static String reservation;
+	static String designer;
+	static int count;
 
 	public static void main(String[] args) {
 		boolean run = true;
-		List<HairShop> hair = new ArrayList<>();
+		List<HairShop> list = new ArrayList<>();
 
 		Scanner scn = new Scanner(System.in);
 		while (run) {
@@ -76,10 +78,10 @@ public class HairShopApp {
 
 						break;
 					case 2:// 조회
-						List<HairShop> list = dao.select();
+						List<HairShop> list1 = dao.select();
 						System.out.println("  상품명    가격           설명");
 						System.out.println("----------------------------------");
-						for (HairShop hs : list) {
+						for (HairShop hs : list1) {
 							System.out.printf("%5s  %-3s" + "원   " + "%-5s\n", //
 									hs.getProduct(), hs.getPrice(), hs.getDes());
 						}
@@ -119,21 +121,23 @@ public class HairShopApp {
 						}
 
 						break;
-					case 5:
+					case 5://종료
 						run1 = false;
-
+						break;
+					default:
+						System.out.println("잘못된 입력입니다.");
 					}// switch
 				} // while
 				continue;
-			default:
-				System.out.println("잘못된 입력입니다.");
+			
+
 			case 2:
 				boolean run2 = true;
 				while (run2) {
-					System.out.println("==============================================");
-					System.out.println("                    고객관리");
-					System.out.println("==============================================");
-					System.out.println("1.고객등록 2.고객목록 3.고객정보수정 4.생일이벤트 5.메인메뉴");
+					System.out.println("=====================================================");
+					System.out.println("                        고객관리");
+					System.out.println("=====================================================");
+					System.out.println("1.고객등록 2.고객목록 3.고객정보수정 4.생일이벤트 5.방문횟수 6.메인메뉴");
 					System.out.println("선택>> ");
 					int menu2 = scn.nextInt();
 					scn.nextLine();
@@ -172,11 +176,11 @@ public class HairShopApp {
 						break;
 					case 2:// 조회
 						HairShop hs2 = new HairShop(clientId, clientName, phone, birth, rank, pay);
-						List<HairShop> list = dao.select1();
+						List<HairShop> list2 = dao.select1();
 
 						System.out.println("고객번호   이름      연락처        생일       등급      선불금");
 						System.out.println("----------------------------------------------------");
-						for (HairShop hs : list) {
+						for (HairShop hs : list2) {
 							System.out.printf("%3d  %7s %-13s %-12s %-6s %5d\n"//
 									, hs.getClientId(), hs.getClientName(), //
 									hs.getPhone(), hs.getBirth(), hs.getRank(), hs.getPay());
@@ -218,8 +222,8 @@ public class HairShopApp {
 					case 4:// 생일조회
 						List<HairShop> list1 = dao.birth();
 						HairShop hs4 = new HairShop(clientName, phone, birth);
-						System.out.println("이름      연락처        생일   ");
-						System.out.println("--------------------------");
+						System.out.println("이름      연락처            생일   ");
+						System.out.println("-------------------------------");
 
 						for (HairShop hs : list1) {
 							System.out.printf("%-3s %12s %-10s\n"//
@@ -228,12 +232,35 @@ public class HairShopApp {
 						System.out.println("\n‼생일이벤트 문자를 발송해 주세요.\n");
 
 						break;
-					case 5:// 메인메뉴
+						
+					case 5://방문횟수
+						System.out.println("이름을 입력하세요>> ");
+						phone= scn.nextLine();
+						System.out.println("연락처를 입력하세요>> ");
+						phone= scn.nextLine();
+						HairShop hs5 = new HairShop(clientName, phone, count);
+						int b2 = dao.count(hs5);
+						System.out.println("이름      연락처          방문횟수   ");
+						System.out.println("-------------------------------");
+						
+						
+						
+						
+						
+					case 6:// 메인메뉴
 						run2 = false;
+					break;	
+					default:
+						System.out.println("잘못된 입력입니다.");
 					}// end of switch
 				} // end of while
 				continue;
+			
 			case 3:
+			boolean run3 = true;
+			while(run3) {
+				
+				
 				System.out.println("==================================");
 				System.out.println("              예약관리");
 				System.out.println("==================================");
@@ -243,21 +270,20 @@ public class HairShopApp {
 				scn.nextLine();
 				switch (menu3) {
 				case 1:// 예약관리
-					String reaservation;
-					String designer;
+					
 
 					System.out.println("예약일자를 입력하세요(yy-MM-dd)>> ");
-					reaservation = scn.nextLine();
+					reservation = scn.nextLine();
 					System.out.println("이름을 입력하세요>> ");
 					clientName = scn.nextLine();
 					System.out.println("연락처를 입력하세요>> ");
 					phone = scn.nextLine();
 					System.out.println("상품명을 입력하세요>> ");
 					product = scn.nextLine();
-					System.out.println("담당자를 입력하세요>> ");
+					System.out.println("디자이너를 입력하세요>> ");
 					designer = scn.nextLine();
 
-					HairShop hs5 = new HairShop(reaservation, clientName, phone, product, designer);
+					HairShop hs5 = new HairShop(reservation, clientName, phone, product, designer);
 					int c = dao.insert2(hs5);
 
 					if (c > 0) {// 1
@@ -269,20 +295,52 @@ public class HairShopApp {
 					break;
 
 				case 2:// 조회
-				case 3:// 취소
+					HairShop hs6 = new HairShop(reservation, clientName, phone,product, designer);
+					List<HairShop> reList = dao.select2();
 
-				case 4:// 메인메뉴
-					run2 = false;
+					System.out.println(" 예약일자    이름       연락처         상품명   디자이너");
+					System.out.println("-------------------------------------------");
+					for (HairShop hs : reList) {
+						System.out.printf("%7s %5s %-12s %6s %5s \n"//
+								, hs.getReservation(),hs.getClientName(),hs.getPhone(),hs.getProduct(),hs.getDesigner());
+						}
+					break;
+				case 3:// 예약취소
+					System.out.println("이름을 입력하세요>> ");
+					clientName = scn.nextLine();
+					System.out.println("예약일을 입력하세요>> ");
+					reservation = scn.nextLine();
+//					
 					
+					System.out.println("예약 취소하시겠습니까?(y/n)");
+					String yesNo = scn.nextLine();
+					if (yesNo.toLowerCase().equals("y")) {
+						int c2 = dao.delete2(clientName,reservation);
+						if (c2 > 0) {
+							System.out.println("삭제되었습니다.");
+						} else {
+							System.out.println("삭제를 실패했습니다.");
+						}
+					} else if (yesNo.toLowerCase().equals("n")) {
+						System.out.println("취소되었습니다.");
+					}
+
+					break;
+				case 4:// 메인메뉴
+					run3 = false;
+					break;
+				default:
+					System.out.println("잘못된 입력입니다.");
 				}// end of switch
+			}//end of while
 				continue;
+				
 			case 4:// 종료
 				run = false;
 				break;
 			}// end of switch
-			
+
 		} // end of while
 		System.out.println("종료되었습니다.");
-
 	}
 }

@@ -19,18 +19,26 @@ public class HairShop {
 	String designer;
 	String reservation;
 	
+	int count;
+	
+
+
+
+
 
 	
-	
-
-
-
-
 
 	public HairShop() {
 	}
 
-	public HairShop(String product, String clientName, String phone, String designer, String reservation) {
+	public HairShop(String clientName, String phone, int count) {
+		super();
+		this.clientName = clientName;
+		this.phone = phone;
+		this.count = count;
+	}
+
+	public HairShop(String reservation, String clientName, String phone, String product, String designer ) {
 		super();
 		this.product = product;
 		this.clientName = clientName;
@@ -38,6 +46,7 @@ public class HairShop {
 		this.designer = designer;
 		this.reservation = reservation;
 	}
+
 
 	public HairShop(String clientName, String phone, String birth) {
 		super();
@@ -71,6 +80,19 @@ public class HairShop {
 		this.pay = pay;
 	}
 
+	
+	
+	
+	
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}	
+	
+	
 	public String getReservation() {
 		return reservation;
 	}
@@ -166,5 +188,6 @@ public class HairShop {
 	public void setPay(int pay) {
 		this.pay = pay;
 	}
+
 
 }
