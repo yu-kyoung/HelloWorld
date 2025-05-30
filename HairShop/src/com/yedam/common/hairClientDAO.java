@@ -212,41 +212,23 @@ public class hairClientDAO extends DAO {
 		return List;
 
 	}// birth end
-	
-	
-	public int count(String client) {//방문횟수
-		String sql = "SELECT count FROM hair_client where phone=?";
-		List<HairShop> List = new ArrayList<>();
+
+	public int count(String phone) {//방문횟수 -NVL(count, 0)은 count가 NULL일 경우 0으로 처리
+		String sql = "UPDATE hair_client SET count = NVL(count, 0) + 1 WHERE phone = ?";
 		getConnect();
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			rs = psmt.executeQuery();// 조회
-			while
-				(rs.next()) {
-				psmt.setString(1,client);
-				HairShop cl = new HairShop();
-				cl.setPhone(rs.getString("phone"));
-				List.add(cl);
-			}
+			psmt.setString(1, phone);
+			int r = psmt.executeUpdate();
+			return r;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			disconnect();
 		}
-
 		return 0;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public int insert2(HairShop client) {// 예약고객등록
 
@@ -297,7 +279,7 @@ public class hairClientDAO extends DAO {
 
 	}// select1 end
 
-	public int delete2( String client_name, String reservation) {// 상품삭제
+	public int delete2(String client_name, String reservation) {// 상품삭제
 		String sql = "delete from reservation"//
 				+ " where client_name=? and reservation=? ";
 
@@ -319,7 +301,5 @@ public class hairClientDAO extends DAO {
 		return 0;
 
 	}// delete1 end
-
-	
 
 }

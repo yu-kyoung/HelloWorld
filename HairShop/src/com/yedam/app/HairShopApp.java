@@ -178,12 +178,12 @@ public class HairShopApp {
 						HairShop hs2 = new HairShop(clientId, clientName, phone, birth, rank, pay);
 						List<HairShop> list2 = dao.select1();
 
-						System.out.println("고객번호   이름      연락처        생일       등급      선불금");
-						System.out.println("----------------------------------------------------");
+						System.out.println("고객번호   이름      연락처        생일       등급      선불금     방문횟수");
+						System.out.println("---------------------------------------------------------------");
 						for (HairShop hs : list2) {
-							System.out.printf("%3d  %7s %-13s %-12s %-6s %5d\n"//
+							System.out.printf("%3d  %7s %-13s %-12s %-6s %5d %5d\n"//
 									, hs.getClientId(), hs.getClientName(), //
-									hs.getPhone(), hs.getBirth(), hs.getRank(), hs.getPay());
+									hs.getPhone(), hs.getBirth(), hs.getRank(), hs.getPay(), hs.getCount());
 						}
 						break;
 					case 3:// 수정
@@ -233,19 +233,27 @@ public class HairShopApp {
 
 						break;
 						
-					case 5://방문횟수
-						System.out.println("이름을 입력하세요>> ");
-						phone= scn.nextLine();
-						System.out.println("연락처를 입력하세요>> ");
-						phone= scn.nextLine();
-						HairShop hs5 = new HairShop(clientName, phone, count);
-						int b2 = dao.count(hs5);
-						System.out.println("이름      연락처          방문횟수   ");
-						System.out.println("-------------------------------");
-						
-						
-						
-						
+					case 5: // 방문횟수
+					    System.out.println("연락처를 입력하세요>> ");
+					    phone = scn.nextLine();
+
+					    int count = dao.count(phone); // 방문횟수 증가
+
+					    //출력
+					    List<HairShop> list3 = dao.select1();
+					    System.out.println("이름        연락처          방문횟수");
+					    System.out.println("-------------------------------");
+					    for (HairShop hs : list3) {
+					        if (hs.getPhone().equals(phone)) {
+					            System.out.printf("%-7s %-15s %5d\n", hs.getClientName(), hs.getPhone(), hs.getCount());
+					        }
+					    }
+					    if (count > 0) {
+					    	System.out.println("방문횟수가 추가되었습니다.");
+					    } else {
+					    	System.out.println("찾을 수 없습니다.");
+					    }
+					    break;
 						
 					case 6:// 메인메뉴
 						run2 = false;
