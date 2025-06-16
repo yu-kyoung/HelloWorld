@@ -16,33 +16,40 @@ Date.prototype.format = function() {
 	return yyyy + '-' + ('0' + MM).slice(-2) + '-' + ('0' + dd).slice(-2) + ' ' + ('0' + hh).slice(-2) + ':'//
 		+ ('0' + mm).slice(-2) + ':' + ('0' + ss).slice(-2);
 }
+
+//글목록 출력
+showReplyList();
+function showReplyList() {
+	document.querySelector('#target').innerHTML = "";//목록 초기화
+	svc.replyList({ bno, page }//게시글번호
+		, result => {
+			console.log(result);
+			let ul = document.querySelector('#target');
+			let template = document.querySelector('#target li');
+			for (let reply of result) {
+				template = makeTemplate(reply);
+				//
+				ul.insertAdjacentHTML("beforeend", template);
+			}
+			//댓글페이지
+			showPageList();
+		}
+		, err => console.log(err)
+	);
+}//end showreplylist
+
+
 //이벤트
 //댓글등록이벤트
 document.querySelector('#addReply').addEventListener('click', addReplyHandler);
+
 //댓글링크이벤트
 function pagingEvent() {
 	document.querySelectorAll('.footer nav a').forEach(function(elem, idx) {
 		console.log(elem);
 		elem.addEventListener('click', function(e) {
-			document.querySelector('#target').innerHTML = "";
-			page = e.target.innerHTML;//a태그의 <a>1</a>
-			svc.replyList({ bno, page }//게시글번호
-				, result => {
-					console.log(result);
-					let ul = document.querySelector('#target');
-					let template = "";// document.querySelector('#target li');
-					//5건씩 화면에 출력
-					for (let reply of result) {
-						template = makeTemplate(reply);
-						//
-						ul.insertAdjacentHTML("beforeend", template);
-					}
-					//댓글페이지
-						showPageList();
-				}
-				, err => console.log(err)
-			);
-
+			page = e.target.dataset.page;//a태그의 <a>1</a>
+			showReplyList();//
 		})
 	});
 }//end of pagingEvent
@@ -56,15 +63,16 @@ function addReplyHandler(e) {
 	}
 
 
-//댓글등록
+	//댓글등록
 	svc.addReply({ bno, reply, replyer: logId }
 		, result => {
 			console.log(result)
 			if (result.retCode == "Success") {
 				let ul = document.querySelector('#target');
 				let rval = result.retVal;
-
-				ul.insertAdjacentHTML("afterbegin", makeTemplate(rval));
+				page = 1;//첫페이지로 지정
+				showReplyList();//댓글목록출력
+				//ul.insertAdjacentHTML("afterbegin", makeTemplate(rval));
 				document.querySelector('#reply').value = ""; //입력값 초기화 
 			}//end of if
 		}
@@ -73,23 +81,6 @@ function addReplyHandler(e) {
 
 }
 
-//글목록 출력
-page = 2;
-svc.replyList({ bno, page }//게시글번호
-	, result => {
-		console.log(result);
-		let ul = document.querySelector('#target');
-		let template = document.querySelector('#target li');
-		for (let reply of result) {
-			template = makeTemplate(reply);
-			//
-			ul.insertAdjacentHTML("beforeend", template);
-		}
-		//댓글페이지
-		showPageList();
-	}
-	, err => console.log(err)
-);
 
 
 //댓글페이징 출력
@@ -116,7 +107,7 @@ function showPageList() {
 			//이전페이지
 			let str;
 			if (prev) {
-				str = `<li class="page-item"><a class="page-link" href="#">Previous</a></li>`;
+				str = `<li class="page-item"><a class="page-link" href="#" data-page="${start - 1}">Previous</a></li>`;
 
 			} else {
 				str = `<li class="page-item disabled"><span class="page-link" href="#">Previous</span></li>`;
@@ -129,13 +120,13 @@ function showPageList() {
 					str = `<li class="page-item active" aria-current="page"><span
 									class="page-link">${p}</span></li>`
 				} else {
-					str = `<li class="page-item"><a class="page-link" href="#">${p}</a></li>`
+					str = `<li class="page-item"><a class="page-link" href="#" data-page="${p}">${p}</a></li>`
 				};
 				target.insertAdjacentHTML('beforeend', str);
 			}
 			//이후페이지
 			if (next) {
-				str = `<li class="page-item"><a class="page-link" href="#">Next</a></li>`;
+				str = `<li class="page-item"><a class="page-link" href="#" data-page="${end + 1}">Next</a></li>`;
 
 			} else {
 				str = `<li class="page-item disabled"><span class="page-link" href="#">Nest</span></li>`;
@@ -163,17 +154,28 @@ function makeTemplate(reply = {}) {
 }
 
 //댓글삭제 함수
-function deleteReply(e) {
+async function deleteReply(e) {
+
 	let rno = e.target.parentElement.parentElement.dataset.rno;
+	let data = await fetch('replyInfo.do?rno=' + rno);
+	let result = await data.json();
+	if (result.replyer != logId) {
+		alert('권한없음!');
+		return;
+	}
+
+
 	svc.removeReply(rno
 		, result => {
 			console.log(result);
 			if (result.retCode == "Success") {
 				alert("성공")
-				e.target.parentElement.parentElement.remove();
+				//e.target.parentElement.parentElement.remove();
+				showReplyList();
 			} else {
 				alert("실패")
 			}
+
 		}
 		, err => console.log(err)
 	)
