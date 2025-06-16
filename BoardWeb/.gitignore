@@ -2,3 +2,7 @@
 /.settings/
 /.classpath
 /.project
+<<<<<<< HEAD
+=======
+/target/
+>>>>>>> branch 'master' of https://github.com/yu-kyoung/HelloWorld.git

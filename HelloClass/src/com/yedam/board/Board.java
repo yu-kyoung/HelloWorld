@@ -3,7 +3,11 @@ package com.yedam.board;
 // 글번호, 제목, 내용, 작성자 : 필드.
 // getter, setter 작성 : 메소드.
 // 기본생성자, 전체매개값을 갖는 생성자.
+<<<<<<< HEAD
 
+=======
+//
+>>>>>>> branch 'master' of https://github.com/yu-kyoung/HelloWorld.git
 public class Board {
 	private int boardNo; // 글번호.
 	private String title; // 제목.
