@@ -137,7 +137,7 @@ function showPageList() {
 		}, err => console.log(err)
 	);
 };//end of showPageList
-
+//
 //댓글화면 출력
 function makeTemplate(reply = {}) {
 	let rdate = new Date(reply.replyDate).format();
