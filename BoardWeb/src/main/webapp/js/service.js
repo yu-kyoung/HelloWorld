@@ -8,9 +8,9 @@ const svc = {//add메소드
 		return num1 + num2;
 	},
 	//목록출력메소드
-	replyList(bno, successCallback, errorCallback) {
+	replyList(param = { bno, page }, successCallback, errorCallback) {
 		//ajax호출
-		fetch('replyList.do?bno=' + bno)
+		fetch('replyList.do?bno=' + param.bno + '&page=' + param.page)
 			.then(data => data.json())
 			.then(successCallback)
 			.catch(errorCallback)
@@ -24,19 +24,30 @@ const svc = {//add메소드
 			.then(successCallback)
 			.catch(errorCallback)
 	},
-//속성값과 변수값이 같을때 생략가능 bno:bno = bno
+	//속성값과 변수값이 같을때 생략가능 bno:bno = bno
 	addReply(param = { bno, reply, replyer }, successCallback, errorCallback) {
 		//ajax
 		fetch('addReply.do?', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: 'bno=' + param.bno + '&reply='+ param.reply + '&replyer=' + param.replyer
+			body: 'bno=' + param.bno + '&reply=' + param.reply + '&replyer=' + param.replyer
 		})
 			.then(data => data.json())
 			.then(successCallback)
 			.catch(errorCallback)
+	},
+//댓글전체 건수
+	replyCount(bno, successCallback, errorCallback) {
+		fetch('replyCount.do?bno=' + bno)
+			.then(data => data.json())
+			.then(successCallback)
+			.catch(errorCallback)
 	}
+
+
 }
+
+
 
 
 //댓글을 row 생성

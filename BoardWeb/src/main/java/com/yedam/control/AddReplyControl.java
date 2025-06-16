@@ -1,6 +1,7 @@
 package com.yedam.control;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.yedam.common.Control;
-import com.yedam.common.RetCode;
 import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
 import com.yedam.vo.ReplyVO;
@@ -37,6 +37,7 @@ public class AddReplyControl implements Control {
 		rvo.setBoardNo(Integer.parseInt(bno));
 		rvo.setReply(reply);
 		rvo.setReplyer(replyer);
+		rvo.setReplyDate(new Date());
 		
 		// DB 입력처리.
 		ReplyService svc = new ReplyServiceImpl();
