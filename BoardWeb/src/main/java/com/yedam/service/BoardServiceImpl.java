@@ -1,6 +1,7 @@
 package com.yedam.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -15,8 +16,10 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> boardList(SearchDTO search) {
-		return mapper.selectListWithPaging(search);
+		//return mapper.selectListWithPaging(search);
+		return mapper.selectList();
 	}
+	
 
 	@Override
 	public BoardVO getBoard(int bno) {
@@ -61,5 +64,10 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int getTotalCount(SearchDTO search) {
 		return mapper.selectCount(search);
+	}
+
+	@Override
+	public List<Map> chartCount() {
+		return mapper.selectUserByCount();
 	}
 }

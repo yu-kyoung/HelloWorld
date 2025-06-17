@@ -15,6 +15,8 @@ import com.yedam.control.AddReplyControl;
 import com.yedam.control.AllControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.ChartControl;
+import com.yedam.control.ChartPageControl;
 import com.yedam.control.GetReplyControl;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginFormControl;
@@ -47,7 +49,9 @@ public class FrontController extends HttpServlet {
 		map.put("/addBoard.do", new AddBoardControl());
 		map.put("/modifyBoard.do", new ModifyBoardControl()); // 수정화면
 		map.put("/removeBoard.do", new RemoveBoardControl()); // 삭제화면
-
+		map.put("/chart.do", new ChartControl());
+		map.put("/chartpage.do", new ChartPageControl());
+		
 		// member관련.
 		map.put("/loginForm.do", new LoginFormControl()); // 화면.
 		map.put("/login.do", new LoginControl()); // id,pw 로그인처리.
