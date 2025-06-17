@@ -9,7 +9,6 @@ import com.yedam.common.DataSource;
 import com.yedam.common.SearchDTO;
 import com.yedam.mapper.BoardMapper;
 import com.yedam.vo.BoardVO;
-import com.yedam.vo.EventVO;
 
 
 public class BoardServiceImpl implements BoardService {
@@ -75,14 +74,14 @@ public class BoardServiceImpl implements BoardService {
 
 
 	@Override
-	public List<EventVO> eventList() {
+	public List<Map<String, String>> eventList() {
 		return mapper.selectEvent();
 	}
 
 
 	@Override
-	public boolean addEvent(EventVO event) {
-		int r = mapper.insertEvent(event);
+	public boolean addEvent(Map<String, String> map) {
+		int r = mapper.insertEvent(map);
 		if (r == 1) {
 			sqlSession.commit();// 커밋처리.
 			return true;
@@ -91,8 +90,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public boolean removeEvent(int eno) {
-		int r = mapper.deleteEvent(eno);
+	public boolean removeEvent(Map<String, String> map) {
+		int r = mapper.deleteEvent(map);
 		if (r == 1) {
 			sqlSession.commit();// 커밋처리.
 			return true;

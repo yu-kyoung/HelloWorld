@@ -1,6 +1,8 @@
 package com.yedam.control;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +17,22 @@ public class RemoveEventControl implements Control {
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String eno = req.getParameter("eno");
+		String title = req.getParameter("title");
+		String startDay = req.getParameter("startDay");
+		String endDay = req.getParameter("endDay");
+
+		Map<String, String> map = new HashMap<>();
+		map.put("title",title);
+		map.put("startDay",startDay);
+		map.put("endDay",endDay);
 		
+
 		BoardService svc = new BoardServiceImpl();
-		
-		resp.sendRedirect("eventList.do");
+		if (svc.removeEvent(map)) {
+			resp.getWriter().print("{\"retCode\": \"Success\"}");
+		} else {
+			resp.getWriter().print("{\"retCode\": \"Fail\"}");
+		}
 	}
 
 }

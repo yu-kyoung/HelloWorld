@@ -22,8 +22,8 @@ public interface BoardMapper {
 	public int selectCount(SearchDTO search);
 	public List<Map> selectUserByCount();
 	
-	public List<EventVO> selectEvent();
-	public int insertEvent(EventVO event);
-	public int deleteEvent(int eno);
+	public List<Map<String, String>> selectEvent();
+	public int insertEvent(Map<String, String> map);
+	public int deleteEvent(Map<String, String> map);
 	
 }

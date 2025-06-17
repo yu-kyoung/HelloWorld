@@ -20,7 +20,7 @@ public interface BoardService {
     public int getTotalCount(SearchDTO search); // selectCount() :매퍼쪽.
     public List<Map> chartCount();
     //이벤트
-    public List<EventVO> eventList();
-    public boolean addEvent(EventVO event);
-    public boolean removeEvent(int eno);
+    public List<Map<String, String>> eventList();
+    public boolean addEvent(Map<String, String> map);
+    public boolean removeEvent(Map<String, String> map);
 }

@@ -1,12 +1,16 @@
-<!DOCTYPE html>
+<!DOCTYPE html>Add commentMore actions
 <html>
 <head>
 <meta charset='utf-8' />
 <script src='./dist/index.global.js'></script>
 <script>
 
-  document.addEventListener('DOMContentLoaded', function() {//페이지가 열릴때
+  document.addEventListener('DOMContentLoaded',async function() {
     var calendarEl = document.getElementById('calendar');
+  	// ajax.
+		let data = await fetch('eventList.do');
+		let result = await data.json();
+		let eventAry = result;//결과를 events: eventAry 로 담아주기(61 line).
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
@@ -14,86 +18,47 @@
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
-      initialDate: '2023-01-12',
+      initialDate: '2025-06-12',
       navLinks: true, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
-      select: function(arg) {
+      select: async function(arg) {
         var title = prompt('Event Title:');
         if (title) {
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay
-          })
+        	// 파라미터.
+        	let startStr = arg.startStr.substring(0, 19);
+        	let endStr = arg.endStr.substring(0, 19);
+    			// ajax.
+        	let response = await fetch('addEvent.do?title='+title+'&startDay='+startStr+'&endDay='+endStr);
+        	let obj = await response.json();
+        	if (obj.retCode == 'Success') {       		  
+            calendar.addEvent({
+              title: title,
+              start: arg.start,
+              end: arg.end,
+              allDay: arg.allDay
+            })
+        	} // end of if.
         }
         calendar.unselect()
       },
-      eventClick: function(arg) {
-        if (confirm('Are you sure you want to delete this event?')) {
-          arg.event.remove()
+      eventClick: async function(arg) {
+    	  console.log(arg);// arg를 활용.
+        if (confirm('삭제?')) {
+        	// 파라미터.
+        	let startStr = arg.event.startStr.substring(0, 19);
+        	let endStr = arg.event.endStr.substring(0, 19);
+					// ajax.
+        	let response = await fetch('removeEvent.do?title='+arg.event.title+'&startDay='+startStr+'&endDay='+endStr);
+        	let obj = await response.json();
+        	if (obj.retCode == 'Success') {       		  
+            arg.event.remove();
+        	}
         }
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: 'All Day Event',
-          start: '2023-01-01',
-          end: '2023-01-04'
-        },
-        {
-          title: 'Long Event',
-          start: '2023-01-07',
-          end: '2023-01-10'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-01-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-01-16T16:00:00'
-        },
-        {
-          title: 'Conference',
-          start: '2023-01-11',
-          end: '2023-01-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-01-12T10:30:00',
-          end: '2023-01-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2023-01-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-01-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2023-01-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2023-01-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2023-01-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2023-01-28'
-        }
-      ]
+      events: eventAry
     });
 
     calendar.render();

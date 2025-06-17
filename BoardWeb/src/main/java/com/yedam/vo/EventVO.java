@@ -8,5 +8,5 @@ public class EventVO {
 	private String title;
 	private String startDay;
 	private String endDay;
-	private int eventNo;
+
 }
