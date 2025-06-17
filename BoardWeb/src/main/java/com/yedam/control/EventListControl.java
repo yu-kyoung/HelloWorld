@@ -20,11 +20,12 @@ public class EventListControl implements Control {
 		resp.setContentType("text/json;charset=utf-8");
 
 		String title = req.getParameter("title");
-		
 	
 		BoardService svc = new BoardServiceImpl();
 		List<EventVO> list = svc.eventList();
 		req.setAttribute("evnetList", list);
+		
+		
 	}
 
 }
