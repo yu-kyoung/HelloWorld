@@ -23,11 +23,11 @@
       selectable: true,
       selectMirror: true,
       select: async function(arg) {
-        var title = prompt('Event Title:');
+        var title = prompt('일정 등록:');
         if (title) {
         	// 파라미터.
-        	let startStr = arg.startStr.substring(0, 19);
-        	let endStr = arg.endStr.substring(0, 19);
+        	let startStr = arg.startStr.substring(0, 30);
+        	let endStr = arg.endStr.substring(0, 30);
     			// ajax.
         	let response = await fetch('addEvent.do?title='+title+'&startDay='+startStr+'&endDay='+endStr);
         	let obj = await response.json();
