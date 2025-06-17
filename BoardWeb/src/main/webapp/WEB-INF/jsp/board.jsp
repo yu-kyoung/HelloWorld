@@ -62,8 +62,8 @@ div.reply span {
 <div class="container reply">
 	<div class="header">
 		<input class="col-sm-8 " id="reply">
-		<button class="col-sm-3 btn btn-primary" id="addReply">등록</button>
-		<button class="col-sm-3 btn btn-danger" id="delReply">삭제</button>
+		<button class="col-sm-2 btn btn-primary" id="addReply">등록</button>
+		<button class="col-sm-2 btn btn-danger" id="delReply">삭제</button>
 	</div>
 
 	<!-- datatable 활용 -->
@@ -126,20 +126,28 @@ table.on('click', 'tbody tr', (e) => {
     }
     else {
         table.rows('.selected').nodes().each((row) => row.classList.remove('selected'));
-        classList.add('selected');
+        classList.add('selected');//기존에 있던 셀렉티드를 지우고 다시 새로운 셀렉티드(classList)
     }
 });
  
-document.querySelector('#delReply').addEventListener('click', function () {
+document.querySelector('#delReply').addEventListener('click', async function () {
 	//let data = await fetch(??)
+	if(!document.querySelector('tr.selected')){
+		alert("댓글선택");
+		return;
+	}
 	let rno=document.querySelector('tr.selected').children[0].innerHTML;
-	fetch('removeReply.do?rno='+rno)
-	.then(data=>data.json())
-	.then(result=>{
-	console.log(result);
+	let data= await fetch('removeReply.do?rno='+rno);
+	let result=await data.json();
+	if(result.retCode=='Success'){
+//fetch('removeReply.do?rno='+rno);
+//	.then(data=>data.json())
+//	.then(result=>{
+//	console.log(result);
+
     table.row('.selected').remove().draw(false);
-	})
-	.catch(err => console.log(err)); 
+	}
+ //.catch(err => console.log(err)); 
 });
 
 

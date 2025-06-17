@@ -117,7 +117,20 @@
 		GROUP by writer, member_name
 	</select>
 
+	<select id="selectEvent" resultType="Event">
+		select * from tbl_event
+		order by event_no desc
+	</select>
 
+	<select id="insertEvent" parameterType="Event">
+		insert into tbl_events(event_no, title, start_day, end_day)
+		VALUES (event_seq.nextval, #{title}, #{startDay}, #{endDay})
+	</select>
+	
+	<delete id="deleteEvent" parameterType="string" >
+		delete from tbl_events
+		where title = #{title}
+	</delete>
 
 
 </mapper>
