@@ -15,9 +15,13 @@
           </c:otherwise>
         </c:choose>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="allProduct.do">자바스크립트</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">차트</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="eventList.do">달력</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="signUp.do">회원가입</a>
+        
+        
+        
+        
     </div>
 </div>
     

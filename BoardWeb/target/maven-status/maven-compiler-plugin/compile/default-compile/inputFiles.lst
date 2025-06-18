@@ -26,6 +26,7 @@ D:\Dev\git\BoardWeb\src\main\java\com\yedam\control\RemoveReplyControl.java
 D:\Dev\git\BoardWeb\src\main\java\com\yedam\control\ReplyCountControl.java
 D:\Dev\git\BoardWeb\src\main\java\com\yedam\control\ReplyInfoControl.java
 D:\Dev\git\BoardWeb\src\main\java\com\yedam\control\ReplyListControl.java
+D:\Dev\git\BoardWeb\src\main\java\com\yedam\control\signUpControl.java
 D:\Dev\git\BoardWeb\src\main\java\com\yedam\mapper\BoardMapper.java
 D:\Dev\git\BoardWeb\src\main\java\com\yedam\mapper\MemberMapper.java
 D:\Dev\git\BoardWeb\src\main\java\com\yedam\mapper\ReplyMapper.java

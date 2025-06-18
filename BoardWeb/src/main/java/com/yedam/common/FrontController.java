@@ -31,6 +31,7 @@ import com.yedam.control.RemoveReplyControl;
 import com.yedam.control.ReplyCountControl;
 import com.yedam.control.ReplyInfoControl;
 import com.yedam.control.ReplyListControl;
+import com.yedam.control.signUpControl;
 
 /*
  * M-V-Control역할.
@@ -59,6 +60,8 @@ public class FrontController extends HttpServlet {
 		map.put("/loginForm.do", new LoginFormControl()); // 화면.
 		map.put("/login.do", new LoginControl()); // id,pw 로그인처리.
 		map.put("/logout.do", new LogoutControl());
+		map.put("/signUp.do", new signUpControl());
+		
 		// 회원목록.
 		map.put("/memberList.do", new MemberListControl());
 		// 상품관련.

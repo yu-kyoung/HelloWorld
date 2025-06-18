@@ -24,6 +24,15 @@
     order by ${order}
   </select>
 
+<!-- 회원추가 -->
+<insert id= "insertMember" parameterType="Member">
+insert into tbl_member(
+			member_id
+          ,member_name
+          ,password
+          ,img)
+values(#{memberId},#{memverName},#{password},#{img})
+</insert>
 </mapper>
 
 
