@@ -18,6 +18,7 @@ import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.ChartControl;
 import com.yedam.control.ChartPageControl;
+import com.yedam.control.CheckControl;
 import com.yedam.control.EventListControl;
 import com.yedam.control.GetReplyControl;
 import com.yedam.control.LoginControl;
@@ -61,7 +62,7 @@ public class FrontController extends HttpServlet {
 		map.put("/login.do", new LoginControl()); // id,pw 로그인처리.
 		map.put("/logout.do", new LogoutControl());
 		map.put("/signUp.do", new signUpControl());
-		
+		map.put("/checkId.do", new CheckControl());
 		// 회원목록.
 		map.put("/memberList.do", new MemberListControl());
 		// 상품관련.

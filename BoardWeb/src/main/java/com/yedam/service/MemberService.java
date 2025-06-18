@@ -11,4 +11,6 @@ public interface MemberService {
 	
 	//회원등록
 	public boolean addMember(MemberVO member);
+	//조회
+	public boolean getMemberInfo(String id);
 }

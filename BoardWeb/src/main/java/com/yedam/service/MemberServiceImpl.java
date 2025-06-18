@@ -33,4 +33,13 @@ public class MemberServiceImpl implements MemberService {
 		return false;
 	}
 
+	@Override
+	public boolean getMemberInfo(String id) {
+		MemberVO member = mapper.selectMemberInfo(id);
+		if(member != null) {
+			return true;
+		}
+		return false;
+	}
+
 }

@@ -2,7 +2,7 @@
 
     pageEncoding="UTF-8"%>
 
-	pageEncoding="UTF-8"%>
+	
 
 <link
 	href="//cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css"
