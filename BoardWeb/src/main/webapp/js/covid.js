@@ -61,7 +61,7 @@ document.querySelector('#sido').addEventListener('change', function(e) {
 			if (center.sido == keyword) {
 				let tr = makeRow(center);
 				acc.appendChild(tr);
-
+//
 			}
 			return acc;
 		}, document.querySelector('#centerList'));
