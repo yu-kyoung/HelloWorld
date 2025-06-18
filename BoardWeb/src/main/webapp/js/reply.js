@@ -163,7 +163,7 @@ async function deleteReply(e) {
 		alert('권한없음!');
 		return;
 	}
-
+//
 
 	svc.removeReply(rno
 		, result => {
